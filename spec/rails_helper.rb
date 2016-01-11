@@ -34,4 +34,15 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  def log_in_user
+    visit root_path
+
+    click_on("Log In")
+
+    fill_in "Email", with: "new@new.com"
+    fill_in "Password", with: "password"
+
+    click_on("Log In")
+  end
 end

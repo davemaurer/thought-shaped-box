@@ -4,4 +4,28 @@
       <h2>Hello, <%= current_user.email %></h2>
     </div>
   </div>
+  <div class="row col-md-6">
+    <div class="form-group">
+      <h3>Submit A New Link</h3>
+      <%= form_for @link do |f| %>
+        <%= f.label :title %>
+        <%= f.text_field :title, placeholder: "Title" %>
+        <%= f.label :url %>
+        <%= f.text_field :url, placeholder: "URL" %>
+        <%= f.submit "Create Link", class: "btn btn-sm btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row col-md-6">
+    <h2>Your Links</h2>
+    <% @links.each do |link| %>
+      <ul class="list-unstyled">
+        <h4><%= link.title %> | <span class="read-unread">Status - <%= link.status %></span> |
+          <h5><%= link_to link.url, link.url %></h5>
+        </h4>
+      </ul>
+    <% end %>
+  </div>
 </div>
