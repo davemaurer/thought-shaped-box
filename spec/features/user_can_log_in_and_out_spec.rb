@@ -85,4 +85,19 @@ RSpec.feature "User login/logout" do
     expect(User.count).to eq(0)
     expect(page).to have_content('Something went wrong. Please try again')
   end
+
+  scenario "registered user can log in" do
+    User.create!(email: 'newuser@newuser.com', password: 'password')
+
+    visit root_path
+
+    click_link('Log In')
+
+    fill_in 'Email', with: 'newuser@newuser.com'
+    fill_in 'Password', with: 'password'
+    click_on('Submit')
+
+    expect(page).to have_content('Login Successful. Welcome Back')
+    expect(current_path).to eq(site_index_path)
+  end
 end
