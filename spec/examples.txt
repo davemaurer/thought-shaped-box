@@ -1,3 +1,5 @@
-example_id                                           | status | run_time       |
----------------------------------------------------- | ------ | -------------- |
-./spec/features/user_can_log_in_and_out_spec.rb[1:1] | failed | 0.0021 seconds |
+example_id                                           | status  | run_time        |
+---------------------------------------------------- | ------- | --------------- |
+./spec/features/user_can_log_in_and_out_spec.rb[1:1] | passed  | 0.31811 seconds |
+./spec/helpers/site_helper_spec.rb[1:1]              | pending | 0.00003 seconds |
+./spec/models/user_spec.rb[1:1]                      | pending | 0.00004 seconds |
