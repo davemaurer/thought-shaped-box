@@ -22,7 +22,7 @@ RSpec.feature "User login/logout" do
 
     expect(User.count).to eq(1)
     expect(User.first.email).to eq('newuser@newuser.com')
-    expect(current_path).to eq(root_path)
-    # expect(page).to have_content('Hello, newuser#newuser.com')
+    expect(current_path).to eq(links_path)
+    expect(page).to have_content('Hello, newuser#newuser.com')
   end
 end
