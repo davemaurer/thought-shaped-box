@@ -25,4 +25,32 @@ RSpec.feature "User login/logout" do
     expect(current_path).to eq(site_index_path)
     expect(page).to have_content('Hello, newuser@newuser.com')
   end
+
+  scenario "unregistered user cannot use a duplicate email" do
+    visit root_path
+
+    click_link('Sign Up Here')
+
+    expect(User.count).to eq(0)
+
+    fill_in 'Email', with: 'newuser@newuser.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirm Password', with: 'password'
+    click_on('Submit')
+
+    expect(User.count).to eq(1)
+
+    visit root_path
+
+    click_link('Sign Up Here')
+
+    fill_in 'Email', with: 'newuser@newuser.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirm Password', with: 'password'
+    click_on('Submit')
+
+    expect(User.count).to eq(1)
+    expect(current_path).to eq('/users')
+    expect(page).to have_content('Something went wrong. Please try again')
+  end
 end
