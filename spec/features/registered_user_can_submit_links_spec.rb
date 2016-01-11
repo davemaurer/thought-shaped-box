@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User links", type: :feature do
 
   scenario "user successfully creates a link" do
-    User.create!(email: "new@new.com", password: "password", password_confirmation: "password")
+    User.create!(email: "newuser@newuser.com", password: "password", password_confirmation: "password")
     log_in_user
 
     fill_in "Title", with: "google"

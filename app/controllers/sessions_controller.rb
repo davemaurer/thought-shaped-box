@@ -6,12 +6,17 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      flash.now[:notice] = "Login Successful. Welcome Back"
+      flash[:notice] = "Login Successful. Welcome Back"
       redirect_to links_path
     else
-      flash.now[:notice] = "Invalid login. Please try again"
+      flash[:notice] = "Invalid login. Please try again"
       render :new
     end
   end
 
+  def destroy
+    session[:user_id] = nil
+    flash[:notice] = "Bye! Come back soon!"
+    redirect_to root_path
+  end
 end

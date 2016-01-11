@@ -40,9 +40,9 @@ RSpec.configure do |config|
 
     click_on("Log In")
 
-    fill_in "Email", with: "new@new.com"
+    fill_in "Email", with: "newuser@newuser.com"
     fill_in "Password", with: "password"
 
-    click_on("Log In")
+    click_on("Submit")
   end
 end

@@ -100,4 +100,15 @@ RSpec.feature "User login/logout" do
     expect(page).to have_content('Login Successful. Welcome Back')
     expect(current_path).to eq(links_path)
   end
+
+  scenario "registered user can log out" do
+    User.create!(email: 'newuser@newuser.com', password: 'password')
+    log_in_user
+
+    expect(current_path).to eq(links_path)
+    click_on('Logout')
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content('Bye! Come back soon!')
+  end
 end
