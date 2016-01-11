@@ -53,4 +53,36 @@ RSpec.feature "User login/logout" do
     expect(current_path).to eq('/users')
     expect(page).to have_content('Something went wrong. Please try again')
   end
+
+  scenario "user cannot leave password blank" do
+    visit root_path
+
+    click_link('Sign Up Here')
+
+    expect(User.count).to eq(0)
+
+    fill_in 'Email', with: 'newuser@newuser.com'
+    fill_in 'Password', with: ''
+    fill_in 'Confirm Password', with: ''
+    click_on('Submit')
+
+    expect(User.count).to eq(0)
+    expect(page).to have_content('Something went wrong. Please try again')
+  end
+
+  scenario "user cannot leave email blank" do
+    visit root_path
+
+    click_link('Sign Up Here')
+
+    expect(User.count).to eq(0)
+
+    fill_in 'Email', with: ''
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirm Password', with: 'password'
+    click_on('Submit')
+
+    expect(User.count).to eq(0)
+    expect(page).to have_content('Something went wrong. Please try again')
+  end
 end
