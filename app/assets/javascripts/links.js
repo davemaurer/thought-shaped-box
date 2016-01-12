@@ -10,20 +10,22 @@ $(document).ready(function() {
 });
 
 function listenForRead() {
-  $('#mark-as-read').on('click', function(event) {
+  $('.mark-as-read').on('click', function(event) {
     event.preventDefault();
-    var $link = $(this).closest('.link');
+    var $link = $(event.target).closest('.link');
     updateLink($link, true);
-    $link.find('#link-status').text('Read')
+    $link.find('#link-status').text('Read');
+    $link.find('#link-url').addClass('lined')
   })
 }
 
 function listenForUnread() {
-  $('#mark-as-unread').on('click', function(event) {
+  $('.mark-as-unread').on('click', function(event) {
     event.preventDefault();
-    var $link = $(this).closest('.link');
+    var $link = $(event.target).closest('.link');
     updateLink($link, false);
-    $link.find('#link-status').text('Unread')
+    $link.find('#link-status').text('Unread');
+    $link.find('#link-url').removeClass('lined')
   })
 }
 

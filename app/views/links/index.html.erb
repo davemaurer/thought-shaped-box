@@ -36,9 +36,9 @@
       <div class="link all <%= link.read ? 'read' : 'unread' %>" data-id=<%= link.id %>>
         <h4 id="link-title">Title: <%= link.title %></h4>
         <h4 id="link-status"><%= link.status %></h4>
-        <h5 id="link-url"><%= link_to link.url, link.url %></h5>
-        <button type="button" class="btn-sm btn-info" id="mark-as-read">Mark as Read</button>
-        <button type="button" class="btn-sm btn-info" id="mark-as-unread">Mark as Unread</button>
+        <h5 class="<%= link.read ? 'lined' : 'unlined' %>" id="link-url"><%= link_to link.url, link.url %></h5>
+        <button type="button" class="mark-as-read btn-sm btn-info" id="mark-as-read">Mark as Read</button>
+        <button type="button" class="mark-as-unread btn-sm btn-info" id="mark-as-unread">Mark as Unread</button>
         <button type="button" class="btn btn-info btn-sm" id="edit-link">Edit</button>
         <div class="editing" id="edit<%= link.id %>">Edit This Idea
           <div class="edit-form form-group">
