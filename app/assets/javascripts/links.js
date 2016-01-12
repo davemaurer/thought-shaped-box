@@ -6,6 +6,7 @@ $(document).ready(function() {
   listenForFilter('read');
   listenForFilter('unread');
   listenForSearch();
+  listenForSort();
 });
 
 function listenForRead() {
@@ -80,6 +81,28 @@ function listenForSearch() {
       var title = $(link).find('#link-title').text().toLowerCase();
       var match = (title).indexOf(letters) >= 0;
       $(link).toggle(match)
+    })
+  })
+}
+
+function listenForSort() {
+  $('#sort-links').on('click', function () {
+    var $links = $('#links');
+    var $link = $('.link', $links);
+
+    var links = $link.map(function(_, link) {
+      return { t: $(link).text(), v: link.value };
+    }).get();
+    links.sort(function(a, b) {
+      var aCased = a.t.toLowerCase(), bCased = b.t.toLowerCase();
+      return aCased > bCased ? 1 : aCased < bCased ? -1 : 0;
+    });
+    $link.each(function(i, link) {
+      link.value = links[i].v;
+      $(link).text(links[i].t);
+    });
+    $link.sort(function(a, b) {
+      return a - b
     })
   })
 }
