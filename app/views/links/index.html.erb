@@ -18,18 +18,19 @@
   </div>
 </div>
 <div class="container">
-  <div class="row col-md-6">
+<div class="row col-md-12">
+  <div id="links">
     <h2>Your Links</h2>
     <% @links.each do |link| %>
-      <div id="link <%= link.status ? "read" : "unread" %>" data-id="<%= link.id %>">
-      <ul class="list-unstyled">
-        <h4><%= link.title %> | <span class="read-unread" id="link-status"></span> |
-          <h5><%= link_to link.url, link.url %></h5>
-        </h4>
-        <button type="button" class="btn-sm btn-info mark-as-read">Mark as Read</button>
-        <button type="button" class="btn-sm btn-info mark-as-unread">Mark as Unread</button>
+      <div class="link" data-id="<%= link.id %>">
+      <ul>
+        <h4>Title: <%= link.title %> | <h4 id="link-status"><%= link.status %></h4> | </h4>
+        <h5><%= link_to link.url, link.url %></h5>
+        <button type="button" class="btn-sm btn-info" id="mark-as-read">Mark as Read</button>
+        <button type="button" class="btn-sm btn-info" id="mark-as-unread">Mark as Unread</button>
       </ul>
       </div>
     <% end %>
   </div>
+</div>
 </div>
