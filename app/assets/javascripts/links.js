@@ -53,7 +53,7 @@ function listenForEdit() {
       url: '/api/v1/links/' + linkId + '.json',
       data: linkParams,
       success: function() {
-        $link.find('#link-title').text(linkParams.link.title);
+        $link.find('#link-title').text('Title: ' + linkParams.link.title);
         $link.find('#link-url').text(linkParams.link.url);
       }
     })
