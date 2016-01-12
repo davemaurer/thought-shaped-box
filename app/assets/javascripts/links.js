@@ -87,7 +87,7 @@ function listenForSearch() {
 
 function listenForSort() {
   $('#sort-links').on('click', function () {
-    var $links = $('#links');
+    var $links = $('#inner-links');
     var $link = $('.link', $links);
 
     var links = $link.map(function(_, link) {
@@ -101,8 +101,5 @@ function listenForSort() {
       link.value = links[i].v;
       $(link).text(links[i].t);
     });
-    $link.sort(function(a, b) {
-      return a - b
-    })
   })
 }
