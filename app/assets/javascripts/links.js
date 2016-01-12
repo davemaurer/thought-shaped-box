@@ -5,6 +5,7 @@ $(document).ready(function() {
   listenForFilter('all');
   listenForFilter('read');
   listenForFilter('unread');
+  listenForSearch();
 });
 
 function listenForRead() {
@@ -71,3 +72,14 @@ function listenForFilter(filter) {
   })
 }
 
+function listenForSearch() {
+  $('#search-links').keyup(function() {
+    var letters = $('#search-links').val().toLowerCase();
+
+    $('.link').each(function (_, link) {
+      var title = $(link).find('#link-title').text().toLowerCase();
+      var match = (title).indexOf(letters) >= 0;
+      $(link).toggle(match)
+    })
+  })
+}
