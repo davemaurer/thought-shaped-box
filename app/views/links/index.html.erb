@@ -16,13 +16,18 @@
       <% end %>
     </div>
   </div>
+  <div class="row col-md-6">
+    <button type="button" class="btn-sm btn-warning" id='filter-by-all'>Filter All</button>
+    <button type="button" class="btn-sm btn-warning" id='filter-by-read'>Filter Read Only</button>
+    <button type="button" class="btn-sm btn-warning" id='filter-by-unread'>Filter Unread Only</button>
+  </div>
 </div>
 <div class="container">
 <div class="row col-md-12">
   <div id="links">
     <h2>Your Links</h2>
     <% @links.each do |link| %>
-      <div class="link" data-id="<%= link.id %>">
+      <div class="link all <%= link.read ? "read" : "unread" %>" data-id="<%= link.id %>">
       <ul>
         <h4 id="link-title">Title: <%= link.title %></h4>
         <h4 id="link-status"><%= link.status %></h4>

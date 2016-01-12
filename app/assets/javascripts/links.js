@@ -2,6 +2,9 @@ $(document).ready(function() {
   listenForRead();
   listenForUnread();
   listenForEdit();
+  listenForFilter('all');
+  listenForFilter('read');
+  listenForFilter('unread');
 });
 
 function listenForRead() {
@@ -54,3 +57,17 @@ function listenForEdit() {
     })
   })
 }
+
+function listenForFilter(filter) {
+  $('#' + 'filter-by-' + filter).on('click', function() {
+    $('.link').each(function(index, link) {
+      var $link = $(link);
+      if($link.hasClass(filter)) {
+        $link.show();
+      } else {
+        $link.hide();
+      }
+    })
+  })
+}
+
