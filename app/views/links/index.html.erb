@@ -27,29 +27,28 @@
     <input type="text" class="form-control" id="search-links" placeholder="Search for a Link">
   </div>
 </div>
-<div class="container">
-<div class="row col-md-12">
-  <div id="links">
+<div class="container" id="links-container">
+  <div class="row col-md-12">
     <h2>Your Links</h2>
-    <ul id="inner-links">
-    <% @links.each do |link| %>
-      <div class="link all <%= link.read ? 'read' : 'unread' %>" data-id=<%= link.id %>>
-        <h4 id="link-title">Title: <%= link.title %></h4>
-        <h4 id="link-status"><%= link.status %></h4>
-        <h5 class="<%= link.read ? 'lined' : 'unlined' %>" id="link-url"><%= link_to link.url, link.url %></h5>
-        <button type="button" class="mark-as-read btn-sm btn-info" id="mark-as-read">Mark as Read</button>
-        <button type="button" class="mark-as-unread btn-sm btn-info" id="mark-as-unread">Mark as Unread</button>
-        <button type="button" class="btn btn-info btn-sm" id="edit-link">Edit</button>
-        <div class="editing" id="edit<%= link.id %>">Edit This Idea
-          <div class="edit-form form-group">
-            <input type="text" class="form-control" id="edit-title" value="<%= link.title %>">
-            <input type="text" class="form-control" id="edit-url" value="<%= link.url %>">
-            <button type="submit" id="create-edit" class="btn btn-info btn-sm">Edit Idea</button>
+    <div id="links">
+      <ul id="inner-links">
+      <% @links.each do |link| %>
+        <div class="link all <%= link.read ? 'read' : 'unread' %>" data-id=<%= link.id %>>
+          <h4 id="link-title">Title: <%= link.title %></h4>
+          <h4 id="link-status"><%= link.status %></h4>
+          <h5 class="<%= link.read ? 'lined' : 'unlined' %>" id="link-url"><%= link_to link.url, link.url %></h5>
+          <button type="button" class="mark-as btn-sm btn-info">Mark as <%= link.read ? 'Unread' : 'Read' %></button>
+          <!--<button type="button" class="btn btn-info btn-sm" id="edit-link">Edit</button>-->
+          <div class="editing" id="edit<%= link.id %>">Edit This Link
+            <div class="edit-form form-group">
+              <input type="text" class="form-control" name="edit-link-title" id="edit-title" value="<%= link.title %>">
+              <input type="text" class="form-control" name="edit-link-url" id="edit-url" value="<%= link.url %>">
+              <button type="submit" id="create-edit" class="btn btn-info btn-sm">Edit Link</button>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-    </ul>
+      <% end %>
+      </ul>
+    </div>
   </div>
-</div>
 </div>

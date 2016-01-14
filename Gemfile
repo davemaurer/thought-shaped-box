@@ -14,6 +14,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'responders'
 gem 'validate_url'
 gem 'rails_12factor', group: :production
+gem 'simplecov', require: false, group: :test
 
 group :development, :test do
   gem 'byebug'
@@ -21,6 +22,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
+  gem 'phantomjs'
 end
 
 group :development do

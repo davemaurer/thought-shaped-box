@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  listenForRead();
-  listenForUnread();
+  listenForMark();
   listenForEdit();
   listenForFilter('all');
   listenForFilter('read');
@@ -9,23 +8,25 @@ $(document).ready(function() {
   listenForSort();
 });
 
-function listenForRead() {
-  $('.mark-as-read').on('click', function(event) {
+function listenForMark() {
+  $('.mark-as').on('click', function(event) {
     event.preventDefault();
     var $link = $(event.target).closest('.link');
-    updateLink($link, true);
-    $link.find('#link-status').text('Read');
-    $link.find('#link-url').addClass('lined')
-  })
-}
-
-function listenForUnread() {
-  $('.mark-as-unread').on('click', function(event) {
-    event.preventDefault();
-    var $link = $(event.target).closest('.link');
-    updateLink($link, false);
-    $link.find('#link-status').text('Unread');
-    $link.find('#link-url').removeClass('lined')
+    if($link.hasClass('unread')) {
+      updateLink($link, true);
+      $link.find('#link-status').text('Read');
+      $link.find('.mark-as').text('Mark as Unread');
+      $link.removeClass('unread');
+      $link.addClass('read');
+      $link.find('#link-url').addClass('lined')
+    } else {
+      updateLink($link, false);
+      $link.find('#link-status').text('Unread');
+      $link.find('.mark-as').text('Mark as Read');
+      $link.removeClass('read');
+      $link.addClass('unread');
+      $link.find('#link-url').removeClass('lined')
+    }
   })
 }
 
@@ -88,20 +89,29 @@ function listenForSearch() {
 }
 
 function listenForSort() {
-  $('#sort-links').on('click', function () {
-    var $links = $('#inner-links');
-    var $link = $('.link', $links);
+  var $links = $('div.link');
 
-    var links = $link.map(function(_, link) {
-      return { t: $(link).text(), v: link.value };
-    }).get();
-    links.sort(function(a, b) {
-      var aCased = a.t.toLowerCase(), bCased = b.t.toLowerCase();
-      return aCased > bCased ? 1 : aCased < bCased ? -1 : 0;
+  $('#sort-links').on('click', function() {
+    var orderedLinks = $links.sort(function(a, b) {
+      return $(a).find('#link-title').text() > $(b).find('#link-title').text();
     });
-    $link.each(function(i, link) {
-      link.value = links[i].v;
-      $(link).text(links[i].t);
-    });
+    $('#inner-links').html(orderedLinks);
   })
 }
+
+//  $('#sort-links').on('click', function () {
+//    var $link = $('.link');
+//
+//    var links = $link.map(function(_, link) {
+//      return { t: $(link).text(), v: link.value };
+//    }).get();
+//    links.sort(function(a, b) {
+//      var aCased = a.t.toLowerCase(), bCased = b.t.toLowerCase();
+//      return aCased > bCased ? 1 : aCased < bCased ? -1 : 0;
+//    });
+//    $link.each(function(i, link) {
+//      link.val = links[i].v;
+//      $(link).text(links[i].t);
+//    });
+//  })
+//}
